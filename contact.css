@@ -2,3 +2,9 @@
 {
     margin: 0px 300px 10px 350px;
 }
+
+.err
+{
+    color: red;
+    font-size: 20px; 
+}

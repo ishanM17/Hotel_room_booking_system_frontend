@@ -27,11 +27,32 @@
             <span id="pass_error"></span>
           </div>
           
-    
-          
-          <button class="w-100 btn btn-lg btn-primary" type="submit">Sign Me Up!</button>
-          <p class="mt-5 mb-3 text-muted">&copy; ayaan agarwal</p>
         </form>
+
+        <button class="w-100 btn btn-lg btn-primary" type="submit" onclick= login()>Sign Me Up!</button>
       </main>
+
+      <script>
+        function login(){
+          let email = document.getElementById("email-input").value;
+          let password = document.getElementById("password").value;
+          let currentUser = {
+            "email": email,
+            "password": password
+          };
+          fetch('http://localhost:3000/user/login', {
+            method: 'POST',
+            body: JSON.stringify(currentUser),
+            headers: {
+              'Content-type': 'application/json; charset=UTF-8'
+            }
+          })
+            .then((response) => response.json())
+            .then((json) => {
+              console.log(json);
+            });
+
+        }
+      </script>
 </body>
 </html>

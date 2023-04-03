@@ -6,9 +6,8 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
 		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"/>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
 	<link rel="stylesheet" href="contact.css">
-
 </head>
 
 <body>
@@ -25,14 +24,14 @@
 					<a class="nav-link" href="main.html">Home <span class="sr-only">(current)</span></a>
 				</li>
 				<li class="nav-item">
-                    <a class="nav-link" href="#about">About</a>
-                </li>
+					<a class="nav-link" href="#about">About</a>
+				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="services.html">Services</a>
 				</li>
 				<li class="nav-item">
-                    <a class="nav-link" href="book.html">Book</a>
-                </li>
+					<a class="nav-link" href="book.html">Book</a>
+				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="contact.html">Contact</a>
 				</li>
@@ -42,25 +41,29 @@
 
 	<!--form-->
 	<div class="from-div">
-		<form class="text-primary" >
+		<form class="text-primary">
 			<h3><u>GET IN TOUCH</u></h3><br>
 			<div class="form-group">
 				<label class="h5">Name:*</label><br>
-				<input type="text" class="form-control" aria-label="Large" placeholder="Enter name">
+				<input type="text" id="name" class="form-control" aria-label="Large" placeholder="Enter name" required>
+				<span class="err" id="n_error"></span>
 			</div>
 			<div class="form-group">
-			  <label class="h5">Email Address:*</label>
-			  <input type="email" class="form-control" aria-label="Large" placeholder="Enter email">
+				<label class="h5">Email Address:*</label>
+				<input type="email" id="email" class="form-control" aria-label="Large" placeholder="Enter email" required>
+				<span class="err" id="e_error"></span>
 			</div>
-			<div class="form-group" >
+			<div class="form-group">
 				<label class="h5">Mobile Number:*</label>
-				<input type="text" class="form-control" aria-label="Large" placeholder="Enter name">
+				<input type="text" id="mob" class="form-control" aria-label="Large" placeholder="Enter Number" required>
+				<span class="err" id="mob_error"></span>
 			</div>
 			<div class="form-group">
 				<label class="h5">Comment:*</label>
-				<textarea class="form-control" rows="5" cols="20" id="comment"></textarea>
-			  </div>
-			<button type="submit" class="btn btn-primary" style="text-align: center; margin-left:50px;">Submit</button>
+				<textarea id="comment" class="form-control" rows="5" cols="20" id="comment" maxlength="100"
+					required></textarea>
+			</div>
+			<button type="submit" onclick=valid() class="btn btn-primary" style="text-align: center; margin-left:50px;">Submit</button>
 		</form>
 	</div>
 
@@ -76,7 +79,7 @@
 						Contact
 					</h4>
 					<p class="mb-2">
-						📍 location : near  Bose International Airport<br>
+						📍 location : near Bose International Airport<br>
 						JA-1, JA Block, Sector III, Bidhannagar<br>
 						Kolkata, West Benga Pin: 700014
 					</p>
@@ -123,6 +126,35 @@
 			</p>
 		</footer>
 	</div>
+	<script>
+
+		function valid() {
+			let valid = true;
+			const name = document.getElementById("name").value;
+			const email = document.getElementById("email").value;
+			const mob = document.getElementById("mob").value;
+			const name_p = /^[a-z A-Z]+$/;
+			if (!name.match(name_p)) {
+				document.getElementById("n_error").innerHTML = "enter a valid name";
+				valid = false;
+			}
+
+			check = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,3}))$/;
+			if (email.match(check)) {
+				document.getElementById("e_error").innerHTML = "";
+			}
+			else {
+				document.getElementById("e_error").innerHTML = "enter a valid email";
+				valid = false;
+			}
+
+			var mob_check = /^[0-9]{10}$/;
+			if (!mob.match(mob_check)) {
+				document.getElementById("mob_error").innerHTML = "enter a valid mobile number"
+				valid = false;
+			}
+		}
+	</script>
 </body>
 
 </html>
