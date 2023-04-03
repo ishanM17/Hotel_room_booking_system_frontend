@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOOk</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        body {
+            background-image: url("images/win.jpeg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .title {
+            font-size: 3rem;
+            font-weight: bold;
+            color: black;
+            text-align: center;
+            margin-top: 2rem;
+            transition: transform 0.2s ease;
+        }
+        .title:hover {
+            transform: scale(1.1) rotateY(10deg);
+        }
+        .form {
+            max-width: 450px;
+            padding: 0px 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="title">Book your Rooms</h1>
+    <form class="form" method="post" style="margin: 80px  500px 0px;">
+        <div class="form-floating">
+            <input type="text" class="form-control" id="name" placeholder="name" name="fName">
+            <label>Name</label>
+        </div>
+        <div class="form-floating">
+            <input type="email" class="form-control" id="email-input" placeholder="email" name="email">
+            <label for="floatingInput">Email address</label>
+        </div>
+        <div class="form-floating">
+            <input type="text" class="form-control" id="mob" placeholder="mob" name="mob">
+            <label for="floatingPassword">Mobile</label>
+        </div>
+        <div class="form-floating">
+            <input type="number" class="form-control" id="num" placeholder="num" name="num" min="0" max="20">
+            <label for="floatingPassword">number of Rooms</label>
+        </div>
+        <div class="form-floating">
+            <input type="date" class="form-control" id="checkin" placeholder="checkin" name="checkin" min="0" max="20">
+            <label for="floatingPassword">Checkin Date</label>
+        </div>
+        <div class="form-floating">
+            <input type="date" class="form-control" id="checkOut" placeholder="checkOut" name="checkOut" min="0"
+                max="20">
+            <label for="floatingPassword">CheckOut Date</label>
+        </div>
+    </form>
+    <button id="check" class=" btn  btn-success" onclick=findprice() style=" padding: 10px;  margin: 30px 600px ;">Check
+        price & availablity</button>
+    <div style="margin: 30px 50px ;">
+        <div id="total"
+            style="font-size: 40px; margin-left: 500px; display: inline; background-color: white; border-radius: 10px;">
+        </div>
+    </div>
+    <button id="submit" class="btn btn-primary" onclick=confirm()
+        style=" display: none;padding: 10px;   margin: 30px 650px ; border-radius: 10px;">confirm Booking </button>
+    <script>
+        function findprice() {
+            const room = document.getElementById("num").value;
+            console.log(room);
+            const date1 = new Date(document.getElementById("checkin").value);
+            const date2 = new Date(document.getElementById("checkOut").value);
+            var diff = (date2 - date1)/86400000 ;
+            var tol = 5000 * room * diff;
+            document.getElementById("total").innerHTML = "Total Amount : " + tol;
+            document.getElementById("check").style.display = "none";
+            document.getElementById("submit").style.display = "block";
+        }
+    </script>
+</body>
+</html>

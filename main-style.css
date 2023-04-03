@@ -1,0 +1,25 @@
+body{
+    /* margin: 10px; */
+    background-color: #f5f5f5;
+}
+
+/* image slider */
+
+.image
+{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+/* qualities */
+
+
+.service-item{
+    box-shadow: 0 0 45px black;
+    transition: all 0.5s ease-in-out;
+}
+
+.service-item:hover{
+    scale: 110%;
+    transition: all 0.5s ease-in-out;
+}
