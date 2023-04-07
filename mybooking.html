@@ -1,17 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hotel booking | mybooking</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Hotel booking | mybooking</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
 		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
 </head>
+<style>
+	.service-item {
+		box-shadow: 0 0 45px black;
+		transition: all 0.5s ease-in-out;
+		font-size: 15px;
+		text-align: center;
+	}
+
+	.service-item:hover {
+		scale: 110%;
+		transition: all 0.5s ease-in-out;
+	}
+</style>
+
 <body>
-    <!--Navbar -->
+	<!--Navbar -->
 	<nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-bottom: 100px;">
 		<a href="index.html"><img src="images/logo2.png" title="logo" /></a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -39,18 +54,37 @@
 		</div>
 	</nav>
 
-    <script>
-        fetch('http://localhost:3000/user/register', {
-          method: 'POST',
-          body: JSON.stringify(),
-          headers: {
-            'Content-type': 'application/json; charset=UTF-8'
-          }
-        })
-          .then((response) => response.json())
-          .then((json) => {
-            console.log(json);
-          });
-    </script>
+	<div id="main-div">
+
+	</div>
+	<script>
+		fetch('https://restro-management.vercel.app/menu/getall/' + email, {
+			headers: {
+				'Content-type': 'application/json; charset=UTF-8',
+			}
+		})
+			.then((response) => response.json())
+			.then((json) => {
+				josn.forEach(element => {
+					const main = document.getElementById("main-div");
+					const content = document.createElement("div");
+					const heading = document.createElement("h1");
+					const checkin = document.createElement("p");
+					const checkout = document.createElement("p");
+
+					heading.innerText = "Room type" ;
+					checkin.innerText = "Checkin date" ;
+					checkout.innerText = "Checkout date" ;
+
+					content.appendChild(heading);
+					content.appendChild(checkin);
+					content.appendChild(checkout);
+
+					main.appendChild(content);
+
+				});
+			});
+	</script>
 </body>
+
 </html>
