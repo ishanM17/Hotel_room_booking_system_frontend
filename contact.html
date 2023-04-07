@@ -41,7 +41,7 @@
 
 	<!--form-->
 	<div class="from-div">
-		<form class="text-primary">
+		<form class="text-primary" method="post">
 			<h3><u>GET IN TOUCH</u></h3><br>
 			<div class="form-group">
 				<label class="h5">Name:*</label><br>
@@ -50,7 +50,8 @@
 			</div>
 			<div class="form-group">
 				<label class="h5">Email Address:*</label>
-				<input type="email" id="email" class="form-control" aria-label="Large" placeholder="Enter email" required>
+				<input type="email" id="email" class="form-control" aria-label="Large" placeholder="Enter email"
+					required>
 				<span class="err" id="e_error"></span>
 			</div>
 			<div class="form-group">
@@ -63,7 +64,8 @@
 				<textarea id="comment" class="form-control" rows="5" cols="20" id="comment" maxlength="100"
 					required></textarea>
 			</div>
-			<button type="submit" onclick=valid() class="btn btn-primary" style="text-align: center; margin-left:50px;">Submit</button>
+			<button type="submit" onclick=valid() class="btn btn-primary"
+				style="text-align: center; margin-left:50px;">Submit</button>
 		</form>
 	</div>
 
@@ -153,7 +155,30 @@
 				document.getElementById("mob_error").innerHTML = "enter a valid mobile number"
 				valid = false;
 			}
-		}
+
+		if(valid){
+    	let contact = {
+          	"name": name,
+          	"email": email,
+			"mobile" : mob,
+          	"comment": comment,
+        };
+
+        fetch('http://localhost:3000/contact/post', {
+          method: 'POST',
+          body: JSON.stringify(contact),
+          headers: {
+            'Content-type': 'application/json; charset=UTF-8'
+          }
+        })
+          .then((response) => response.json())
+          .then((json) => {
+            console.log(json);
+          });
+
+        }
+        else return;
+	}
 	</script>
 </body>
 

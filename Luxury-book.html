@@ -132,7 +132,7 @@
                 const room = document.getElementById("num").value;
             console.log(room);
             const date1 = new Date(document.getElementById("checkin").value);
-            const date2 = new Date(document.getElementById("checkOut").value);
+            const date2 = new Date(document.getElementById("checkout").value);
             var diff = (date2 - date1)/86400000 ;
             var tol = 5000 * room * diff;
             document.getElementById("total").innerHTML = "Total Amount : " + tol;

@@ -11,7 +11,6 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <style>
         body {
-            background-image: url("images/win.jpeg");
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -42,7 +41,7 @@
 
 <body>
     <h1 class="title">Book your Rooms</h1>
-    <form class="form" method="post" style="margin: 80px  500px 0px;">
+    <form class="form" method="post" style=" margin: auto; margin-top: 80px;" >
         <div class="form-floating">
             <input type="text" class="form-control" id="name" placeholder="name" name="fName" required>
             <label>Name</label>
@@ -75,7 +74,7 @@
             <span class="err" id="out_error"></span>
         </div>
     </form>
-    <button id="check" class=" btn  btn-success" onclick=findprice() style=" padding: 10px;  margin: 30px 600px ;">Check
+    <button id="check" class=" btn  btn-success" onclick=findprice() style=" padding: 10px;  margin-top: 30px; margin-left: 43%;">Check
         price & availablity</button>
     <div style="margin: 30px 50px ;">
         <div id="total"
@@ -83,7 +82,7 @@
         </div>
     </div>
     <button id="submit" class="btn btn-primary" onclick=confirm()
-        style=" display: none;padding: 10px;   margin: 30px 650px ; border-radius: 10px;">confirm Booking </button>
+        style=" display: none;padding: 10px;  margin-top: 30px; margin-left: 43%; border-radius: 10px;">confirm Booking </button>
     <script>
         function findprice()
         {
