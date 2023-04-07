@@ -59,6 +59,13 @@
             <span class="err" id="mob_error"></span>
         </div>
         <div class="form-floating">
+            <select class="form-select" id="room-type" aria-label="Default select example">
+                <option value="executive">Executive</option>
+                <option value="deluxe">Deluxe</option>
+                <option value="luxury">Luxury</option>
+            </select>
+        </div>
+        <div class="form-floating">
             <input type="number" class="form-control" id="num" placeholder="num" value="1" name="num" min="1" max="20" required>
             <label for="floatingPassword">number of Rooms</label>
             <span class="err" id="num_error"></span>
@@ -88,10 +95,16 @@
         {
 
             let valid = true;
+            const prices = {
+                "executive": 3500,
+                "deluxe": 4500,
+                "luxury": 5000
+            }
 			const name = document.getElementById("name").value;
 			const email = document.getElementById("email").value;
 			const mob = document.getElementById("mob").value;
-             const number_of_room  = document.getElementById("num").value
+            const room_type = document.getElementById("")
+            const number_of_room  = document.getElementById("num").value
             const checkin = document.getElementById("checkin").value;
             console.log(checkin);
             const checkout = document.getElementById("checkout").value;
@@ -126,19 +139,18 @@
                 document.getElementById("out_error").innerHTML = "select checkout date"
                 valid = false
             }
-            if(valid === true)
+            if(valid)
             {
                 const room = document.getElementById("num").value;
-            console.log(room);
-            const date1 = new Date(document.getElementById("checkin").value);
-            const date2 = new Date(document.getElementById("checkOut").value);
-            var diff = (date2 - date1)/86400000 ;
-            var tol = 4500 * room * diff;
-            document.getElementById("total").innerHTML = "Total Amount : " + tol;
-            document.getElementById("check").style.display = "none";
-            document.getElementById("submit").style.display = "block";
+                console.log(room);
+                const date1 = new Date(document.getElementById("checkin").value);
+                const date2 = new Date(document.getElementById("checkOut").value);
+                var diff = (date2 - date1)/86400000 ;
+                var tol = 4500 * room * diff;
+                document.getElementById("total").innerHTML = "Total Amount : " + tol;
+                document.getElementById("check").style.display = "none";
+                document.getElementById("submit").style.display = "block";
             }
-
         }
     </script>
 </body>
