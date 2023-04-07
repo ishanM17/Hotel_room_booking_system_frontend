@@ -26,8 +26,8 @@
 
 	.main-div
 	{
-		margin: 0px 100px; 
-		background-color: black; 
+		margin: 0px 200px; 
+		background-color: rgb(33,37,41); 
 		color: white;
 		padding: 10px;
 	}
@@ -35,7 +35,7 @@
 	h1
 	{
 		font-size: 28px;
-		margin-left: 55px;
+		margin-left: 110px;
 		margin-top: 25px;
 		font-weight: 600;
 		margin-bottom: 40px;
@@ -43,7 +43,7 @@
 	p
 	{
 		font-size: 18px;
-		margin-left: 85px;
+		margin-left: 170px;
 	}
 
 </style>
@@ -78,7 +78,7 @@
 	</nav>
 
 	<div id="main-div" class="main-div">
-		
+
 	</div>
 	<script>
 		fetch('http://localhost:3000/book/get/' + sessionStorage.getItem('userEmail'), {
@@ -109,7 +109,7 @@
 					content.appendChild(checkin);
 					content.appendChild(checkout);
 
-					main.appendChild(content);
+					main.prepend(content);
 
 				});
 			});
