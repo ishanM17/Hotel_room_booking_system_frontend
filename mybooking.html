@@ -23,6 +23,29 @@
 		scale: 110%;
 		transition: all 0.5s ease-in-out;
 	}
+
+	.main-div
+	{
+		margin: 0px 100px; 
+		background-color: black; 
+		color: white;
+		padding: 10px;
+	}
+
+	h1
+	{
+		font-size: 28px;
+		margin-left: 55px;
+		margin-top: 25px;
+		font-weight: 600;
+		margin-bottom: 40px;
+	}
+	p
+	{
+		font-size: 18px;
+		margin-left: 85px;
+	}
+
 </style>
 
 <body>
@@ -54,8 +77,8 @@
 		</div>
 	</nav>
 
-	<div id="main-div">
-
+	<div id="main-div" class="main-div">
+		
 	</div>
 	<script>
 		fetch('http://localhost:3000/book/get/' + sessionStorage.getItem('userEmail'), {
