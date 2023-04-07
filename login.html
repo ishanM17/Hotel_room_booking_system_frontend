@@ -50,8 +50,8 @@
             .then((response) => response.json())
             .then((json) => {
               console.log(json);
+              sessionStorage.setItem('userEmail', email);
             });
-
         }
       </script>
 </body>
