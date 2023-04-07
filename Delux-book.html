@@ -11,6 +11,7 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <style>
         body {
+            background: url('./images/win.jpeg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -22,9 +23,6 @@
             text-align: center;
             margin-top: 2rem;
             transition: transform 0.2s ease;
-        }
-        .title:hover {
-            transform: scale(1.1) rotateY(10deg);
         }
         .form {
             max-width: 450px;
@@ -76,24 +74,29 @@
             <span class="err" id="in_error"></span>
         </div>
         <div class="form-floating">
-            <input type="date" class="form-control" id="checkout" placeholder="checkOut" name="checkOut" required>
+            <input type="date" class="form-control" id="checkout" placeholder="checkOut" name="checkout" required>
             <label for="floatingPassword">CheckOut Date</label>
             <span class="err" id="out_error"></span>
         </div>
     </form>
-    <button id="check" class=" btn  btn-success" onclick=findprice() style=" padding: 10px;  margin-top: 30px; margin-left: 43%;">Check
-        price & availablity</button>
-    <div style="margin: 30px 50px ;">
+    <div style="text-align: center; margin-top: 30px;">
+        <button id="check" class=" btn  btn-success" onclick=findprice() style=" padding: 10px;">Check
+            price & availablity</button>
+    </div>
+    
+    <div style="margin: 30px 50px ; text-align: center;">
         <div id="total"
-            style="font-size: 40px; margin-left: 500px; display: inline; background-color: white; border-radius: 10px;">
+            style="font-size: 40px; margin-left: auto; display: inline; border-radius: 10px;">
         </div>
     </div>
-    <button id="submit" class="btn btn-primary" onclick=confirm()
-        style=" display: none;padding: 10px;  margin-top: 30px; margin-left: 43%; border-radius: 10px;">confirm Booking </button>
+    <div style="text-align: center; margin-top: 30px;">
+        <button id="submit" class="btn btn-primary" onclick=confirm()
+        style=" padding: 10px; border-radius: 10px;display: none; margin: auto;">confirm Booking </button>
+    </div>
+    
     <script>
         function findprice()
         {
-
             let valid = true;
             const prices = {
                 "executive": 3500,
@@ -103,10 +106,9 @@
 			const name = document.getElementById("name").value;
 			const email = document.getElementById("email").value;
 			const mob = document.getElementById("mob").value;
-            const room_type = document.getElementById("")
+            const room_type = document.getElementById("room-type").value;
             const number_of_room  = document.getElementById("num").value
             const checkin = document.getElementById("checkin").value;
-            console.log(checkin);
             const checkout = document.getElementById("checkout").value;
 
 			const name_p = /^[a-z A-Z]+$/;
@@ -144,13 +146,48 @@
                 const room = document.getElementById("num").value;
                 console.log(room);
                 const date1 = new Date(document.getElementById("checkin").value);
-                const date2 = new Date(document.getElementById("checkOut").value);
+                const date2 = new Date(document.getElementById("checkout").value);
+                console.log(date1.getTime() + "   " + date2.getTime());
+
                 var diff = (date2 - date1)/86400000 ;
                 var tol = 4500 * room * diff;
                 document.getElementById("total").innerHTML = "Total Amount : " + tol;
                 document.getElementById("check").style.display = "none";
                 document.getElementById("submit").style.display = "block";
             }
+        }
+
+        function confirm(){
+
+            const name = document.getElementById("name").value;
+			const email = document.getElementById("email").value;
+			const mob = document.getElementById("mob").value;
+            const room_type = document.getElementById("room-type").value;
+            const number_of_room  = document.getElementById("num").value
+            const checkin = document.getElementById("checkin").value;
+            const checkout = document.getElementById("checkout").value;
+
+            let booking = {
+                "name": name,
+                "email": email,
+                "mobile": mob,
+                "room_type": room_type,
+                "num_of_rooms": 2,
+                "checkin": checkin,
+                "checkout": checkout
+            }
+
+            fetch('http://localhost:3000/book/post', {
+                method: 'POST',
+                body: JSON.stringify(booking),
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8'
+                }
+            })
+                .then((response) => response.json())
+                .then((json) => {
+                    console.log(json);
+            });
         }
     </script>
 </body>
