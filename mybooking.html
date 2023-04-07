@@ -58,23 +58,29 @@
 
 	</div>
 	<script>
-		fetch('https://restro-management.vercel.app/menu/getall/' + email, {
+		fetch('http://localhost:3000/book/get/' + sessionStorage.getItem('userEmail'), {
 			headers: {
 				'Content-type': 'application/json; charset=UTF-8',
 			}
 		})
 			.then((response) => response.json())
 			.then((json) => {
-				josn.forEach(element => {
+				console.log(json);
+				json.forEach(element => {
 					const main = document.getElementById("main-div");
 					const content = document.createElement("div");
 					const heading = document.createElement("h1");
+					const numOfRooms = document.createElement("p");
 					const checkin = document.createElement("p");
 					const checkout = document.createElement("p");
 
-					heading.innerText = "Room type" ;
-					checkin.innerText = "Checkin date" ;
-					checkout.innerText = "Checkout date" ;
+					let inDate = new Date(element.checkin);
+					let outDate = new Date(element.checkout);
+
+					heading.innerHTML = element.room_type + " Room";
+					numOfRooms.innerHTML = 'Number of rooms booked: ' + element.num_of_rooms;
+					checkin.innerHTML = "Check-in date: " + inDate.getDate() + " / " + (inDate.getMonth() + 1) + " / " + inDate.getFullYear();
+					checkout.innerHTML = "Check-out date: " + outDate.getDate() + " / " + (outDate.getMonth() + 1) + " / " + outDate.getFullYear();
 
 					content.appendChild(heading);
 					content.appendChild(checkin);
