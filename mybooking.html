@@ -27,7 +27,7 @@
 	.main-div
 	{
 		margin: 0px 200px; 
-		background-color: rgb(33,37,41); 
+		 
 		color: white;
 		padding: 10px;
 	}
@@ -44,6 +44,11 @@
 	{
 		font-size: 18px;
 		margin-left: 170px;
+	}
+	.content-style{
+		margin: 50px 0;
+		background-color: rgb(33,37,41);
+		padding: 20px;
 	}
 
 </style>
@@ -76,9 +81,8 @@
 			</ul>
 		</div>
 	</nav>
-
 	<div id="main-div" class="main-div">
-
+		
 	</div>
 	<script>
 		fetch('http://localhost:3000/book/get/' + sessionStorage.getItem('userEmail'), {
@@ -104,6 +108,8 @@
 					numOfRooms.innerHTML = 'Number of rooms booked: ' + element.num_of_rooms;
 					checkin.innerHTML = "Check-in date: " + inDate.getDate() + " / " + (inDate.getMonth() + 1) + " / " + inDate.getFullYear();
 					checkout.innerHTML = "Check-out date: " + outDate.getDate() + " / " + (outDate.getMonth() + 1) + " / " + outDate.getFullYear();
+
+					content.classList.add('content-style');
 
 					content.appendChild(heading);
 					content.appendChild(checkin);
