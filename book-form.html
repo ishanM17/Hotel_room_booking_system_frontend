@@ -111,6 +111,12 @@
             const checkin = document.getElementById("checkin").value;
             const checkout = document.getElementById("checkout").value;
 
+            document.getElementById("n_error").innerHTML = "";
+            document.getElementById("e_error").innerHTML = "";
+            document.getElementById("mob_error").innerHTML = "";
+            document.getElementById("in_error").innerHTML = "";
+            document.getElementById("out_error").innerHTML = "";
+
 			const name_p = /^[a-z A-Z]+$/;
 			if (!name.match(name_p)) {
 				document.getElementById("n_error").innerHTML = "enter a valid name";

@@ -24,7 +24,7 @@
 					<a class="nav-link" href="main.html">Home <span class="sr-only">(current)</span></a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="/main.html">About</a>
+					<a class="nav-link" href="main.html">About</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="book.html">Book</a>
@@ -41,7 +41,7 @@
 
 	<!--form-->
 	<div class="from-div">
-		<form class="text-primary" method="post">
+		<form class="text-primary" method="post" novalidate>
 			<h3><u>GET IN TOUCH</u></h3><br>
 			<div class="form-group">
 				<label class="h5">Name:*</label><br>
@@ -64,9 +64,11 @@
 				<textarea id="comment" class="form-control" rows="5" cols="20" id="comment" maxlength="100"
 					required></textarea>
 			</div>
-			<button type="submit" onclick=valid() class="btn btn-primary"
-				style="text-align: center; margin-left:10px;">Submit</button>
+			
 		</form>
+		<button type="submit" onclick="valid()" class="btn btn-primary"
+				style="text-align: center; margin-left:10px;">Submit</button>
+		
 	</div>
 
 	<!--Footer-->
@@ -131,6 +133,11 @@
 			const email = document.getElementById("email").value;
 			const mob = document.getElementById("mob").value;
 			const comment = document.getElementById("comment").value;
+
+			document.getElementById("n_error").innerHTML = "";
+			document.getElementById("e_error").innerHTML = "";
+			document.getElementById("mob_error").innerHTML = "";
+
 			const name_p = /^[a-z A-Z]+$/;
 			if (!name.match(name_p)) {
 				document.getElementById("n_error").innerHTML = "enter a valid name";
