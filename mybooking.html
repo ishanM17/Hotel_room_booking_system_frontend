@@ -7,9 +7,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Hotel booking | mybooking</title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
-		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-	<link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"/>
 </head>
 <style>
 	.service-item {
@@ -24,7 +23,7 @@
 		transition: all 0.5s ease-in-out;
 	}
 
-	.main-div
+	#main-div
 	{
 		margin: 0px 200px; 
 		 
@@ -32,7 +31,7 @@
 		padding: 10px;
 	}
 
-	h1
+	.content-title
 	{
 		font-size: 28px;
 		margin-left: 110px;
@@ -40,14 +39,13 @@
 		font-weight: 600;
 		margin-bottom: 40px;
 	}
-	p
+	.content-body
 	{
 		font-size: 18px;
 		margin-left: 170px;
 	}
 	.content-style{
 		margin: 50px 0;
-		background-color: rgb(33,37,41);
 		padding: 20px;
 	}
 
@@ -55,7 +53,7 @@
 
 <body>
 	<!--Navbar -->
-	<nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-bottom: 100px;">
+	<nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-bottom: 50px;">
 		<a href="index.html"><img src="images/logo2.png" title="logo" /></a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
 			aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -67,22 +65,76 @@
 					<a class="nav-link" href="main.html">Home <span class="sr-only">(current)</span></a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#about">About</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="services.html">Services</a>
+					<a class="nav-link" href="main.html">About</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="book.html">Book</a>
 				</li>
+				<li class="nav-item">
+                    <a class="nav-link" href="mybooking.html">Booking History</a>
+                </li>
 				<li class="nav-item">
 					<a class="nav-link" href="contact.html">Contact</a>
 				</li>
 			</ul>
 		</div>
 	</nav>
-	<div id="main-div" class="main-div">
-		
+	<h1 style="text-align: center; ">Booking History</h1>
+	<div id="main-div">
+
+	</div>
+	<div class="container-fluid bg-dark text-light footer pt-5 mt-5" id="contact">
+		<div class="container py-5">
+			<div class="row g-5">
+				<div class="col-lg-2 col-md-6">
+
+				</div>
+				<div class="col-lg-5 col-md-6">
+					<h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">
+						Contact
+					</h4>
+					<p class="mb-2">
+						📍 location : near  Bose International Airport<br>
+						JA-1, JA Block, Sector III, Bidhannagar<br>
+						Kolkata, West Benga Pin: 700014
+					</p>
+					<p class="mb-2">
+						✉ Email: hotelgrandhayat@gmail.com
+					</p>
+					<p class="mb-2">
+						🌐 Email : www.webname.com
+					</p>
+					<p class="mb-2">
+						📞Phone: (+91) 6291462330 || (+91) 6291462330
+					</p>
+					<div class="d-flex pt-2">
+						<a href="" class="btn btn-outline-light btn-social">
+							<i class="fab fa-twitter"></i>
+						</a>
+						<a href="" class="btn btn-outline-light btn-social">
+							<i class="fab fa-youtube"></i>
+						</a>
+						<a href="" class="btn btn-outline-light btn-social">
+							<i class="fab fa-linkedin"></i>
+						</a>
+						<a href="" class="btn btn-outline-light btn-social">
+							<i class="fab fa-facebook"></i>
+						</a>
+					</div>
+				</div>
+				<div class="col-lg-5 col-md-6">
+					<h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">
+						Opening
+					</h4>
+					<h5 class="text-light fw-normal">
+						Monday - Saturday
+					</h5>
+					<p>09AM - 09PM</p>
+					<h5 class="text-light fw-normal">Sunday</h5>
+					<p>10AM - 08PM</p>
+				</div>
+			</div>
+		</div>
 	</div>
 	<script>
 		fetch('http://localhost:3000/book/get/' + sessionStorage.getItem('userEmail'), {
@@ -103,15 +155,21 @@
 
 					let inDate = new Date(element.checkin);
 					let outDate = new Date(element.checkout);
+					console.log(element.num_of_rooms);
 
 					heading.innerHTML = element.room_type + " Room";
-					numOfRooms.innerHTML = 'Number of rooms booked: ' + element.num_of_rooms;
+					numOfRooms.innerHTML = 'Number of rooms booked :  ' + element.num_of_rooms;
 					checkin.innerHTML = "Check-in date: " + inDate.getDate() + " / " + (inDate.getMonth() + 1) + " / " + inDate.getFullYear();
 					checkout.innerHTML = "Check-out date: " + outDate.getDate() + " / " + (outDate.getMonth() + 1) + " / " + outDate.getFullYear();
 
-					content.classList.add('content-style');
+					content.classList.add('content-style', 'bg-dark');
+					heading.classList.add('content-title');
+					numOfRooms.classList.add('content-body');
+					checkin.classList.add('content-body');
+					checkout.classList.add('content-body');
 
 					content.appendChild(heading);
+					content.appendChild(numOfRooms);
 					content.appendChild(checkin);
 					content.appendChild(checkout);
 

@@ -29,7 +29,8 @@
           
         </form>
 
-        <button class="w-100 btn btn-lg btn-primary" type="submit" onclick= login()>Sign Me Up!</button>
+        <button class="w-100 btn btn-lg btn-primary" type="submit" onclick= login()>Login!</button>
+        <p style="margin: 5% auto;">New User?...<a href="./sign-up.html">Sign Up!</a></p>
       </main>
 
       <script>
@@ -52,8 +53,13 @@
               console.log(json);
               if(json.message === 'login successful'){
                 sessionStorage.setItem('userEmail', email);
+                location.href = './main.html';
+              }
+              else {
+                alert('Invalid Credentials');
               }
             });
+          return;
         }
       </script>
 </body>

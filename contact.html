@@ -24,14 +24,14 @@
 					<a class="nav-link" href="main.html">Home <span class="sr-only">(current)</span></a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#about">About</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="services.html">Services</a>
+					<a class="nav-link" href="/main.html">About</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="book.html">Book</a>
 				</li>
+				<li class="nav-item">
+                    <a class="nav-link" href="mybooking.html">Booking History</a>
+                </li>
 				<li class="nav-item">
 					<a class="nav-link" href="contact.html">Contact</a>
 				</li>
@@ -65,7 +65,7 @@
 					required></textarea>
 			</div>
 			<button type="submit" onclick=valid() class="btn btn-primary"
-				style="text-align: center; margin-left:50px;">Submit</button>
+				style="text-align: center; margin-left:10px;">Submit</button>
 		</form>
 	</div>
 
@@ -122,11 +122,6 @@
 				</div>
 			</div>
 		</div>
-		<footer class="">
-			<p class="text-center p-2">
-				Ayaan Agarwal
-			</p>
-		</footer>
 	</div>
 	<script>
 
@@ -157,29 +152,32 @@
 				valid = false;
 			}
 
-		if(valid){
-    	let contact = {
-          	"name": name,
-          	"email": email,
-			"mobile" : mob,
-          	"comment": comment,
-        };
+			if(valid){
+				let contact = {
+					"name": name,
+					"email": email,
+					"mobile" : mob,
+					"comment": comment,
+				};
 
-        fetch('http://localhost:3000/contact/post', {
-          method: 'POST',
-          body: JSON.stringify(contact),
-          headers: {
-            'Content-type': 'application/json; charset=UTF-8'
-          }
-        })
-          .then((response) => response.json())
-          .then((json) => {
-            console.log(json);
-          });
-
-        }
-        else return;
-	}
+				fetch('http://localhost:3000/contact/post', {
+				method: 'POST',
+				body: JSON.stringify(contact),
+				headers: {
+					'Content-type': 'application/json; charset=UTF-8'
+				}
+				})
+				.then((response) => response.json())
+				.then((json) => {
+					console.log(json);
+					if(json.message === 'Feedback has been posted'){
+						alert(json.message);
+						location.href = './main.html';
+					}
+				});
+			}
+			else return;
+		}
 	</script>
 </body>
 
