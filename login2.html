@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <link rel="stylesheet" href="login.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+
+<body ng-app="" name="from1">
+  <main class="form-signin w-100 m-auto">
+    <form method="post" name="from1">
+      <center>
+        <img class="mb-4" src="images/logo2.png" alt="logo-img" width="200" height="60">
+      </center>
+
+      <h1 class="h3 mb-3 fw-normal">Login</h1>
+
+
+      <div class="form-floating">
+        <input class="form-control" placeholder="name@example.com" name="email" ng-model="email" required id="email-input">
+        <label for="floatingInput" ng-show="from1.email.$invalid">Username</label>
+        <center style="color: red;"><span ng-show="from1.email.$invalid">Username required</span></center>
+        <span id="e_error"></span>
+      </div>
+      <div class="form-floating">
+        <input class="form-control" id="password" name="username1" ng-model="username1" required placeholder="Password" name="password">
+        <label for="floatingInput" ng-show="from1.username1.$invalid">Password</label>
+        <center style="color: red;"><span ng-show="from1.username1.$invalid">Password required</span></center>
+        <span id="pass_error"></span>
+        <button class="w-100 btn btn-lg btn-primary" type="submit" onclick=login()>Login!</button>
+        <center>
+          <p style="margin: 5% auto;">New User sign up <a href="./sign-up.html">here!</a></p>
+        </center>
+      </div>
+      <script>
+        function login() {
+          let email = document.getElementById("email-input").value;
+          let password = document.getElementById("password").value;
+          let currentUser = {
+            "email": email,
+            "password": password
+          };
+          fetch('http://localhost:3000/user/login', {
+              method: 'POST',
+              body: JSON.stringify(currentUser),
+              headers: {
+                'Content-type': 'application/json; charset=UTF-8'
+              }
+            })
+            .then((response) => response.json())
+            .then((json) => {
+              console.log(json);
+              if (json.message === 'login successful') {
+                sessionStorage.setItem('userEmail', email);
+                location.href = './main.html';
+              } else {
+                alert('Invalid Credentials');
+              }
+            });
+          return;
+        }
+      </script>
+
+    </form>
+    <form action="">
+
+
+    </form>
+
+</body>
+
+</html>
