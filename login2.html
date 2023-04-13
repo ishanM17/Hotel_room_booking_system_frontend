@@ -23,12 +23,12 @@
 
       <div class="form-floating">
         <input class="form-control" placeholder="name@example.com" name="email" ng-model="email" required id="email-input">
-        <label for="floatingInput" ng-show="from1.email.$invalid">Username</label>
-        <center style="color: red;"><span ng-show="from1.email.$invalid">Username required</span></center>
+        <label for="floatingInput" ng-show="from1.email.$invalid">Email</label>
+        <center style="color: red;"><span ng-show="from1.email.$invalid">Email required</span></center>
         <span id="e_error"></span>
       </div>
       <div class="form-floating">
-        <input class="form-control" id="password" name="username1" ng-model="username1" required placeholder="Password" name="password">
+        <input type="password" class="form-control" id="password" name="username1" ng-model="username1" required placeholder="Password" name="password">
         <label for="floatingInput" ng-show="from1.username1.$invalid">Password</label>
         <center style="color: red;"><span ng-show="from1.username1.$invalid">Password required</span></center>
         <span id="pass_error"></span>
