@@ -16,6 +16,7 @@
             background-position: center;
             background-repeat: no-repeat;
         }
+
         .title {
             font-size: 3rem;
             font-weight: bold;
@@ -24,12 +25,13 @@
             margin-top: 2rem;
             transition: transform 0.2s ease;
         }
+
         .form {
             max-width: 450px;
             padding: 0px 15px;
         }
-        .err
-        {
+
+        .err {
             color: brown;
             font-size: 20px;
             font-weight: 600;
@@ -39,7 +41,7 @@
 
 <body>
     <h1 class="title">Book your Rooms</h1>
-    <form class="form" method="post" style=" margin: auto; margin-top: 80px;" >
+    <form class="form" method="post" style=" margin: auto; margin-top: 80px;">
         <div class="form-floating">
             <input type="text" class="form-control" id="name" placeholder="name" name="fName" required>
             <label>Name</label>
@@ -64,12 +66,14 @@
             </select>
         </div>
         <div class="form-floating">
-            <input type="number" class="form-control" id="num" placeholder="num" value="1" name="num" min="1" max="20" required>
+            <input type="number" class="form-control" id="num" placeholder="num" value="1" name="num" min="1" max="20"
+                required>
             <label for="floatingPassword">number of Rooms</label>
             <span class="err" id="num_error"></span>
         </div>
         <div class="form-floating">
-            <input type="date" class="form-control" id="checkin" placeholder="checkin" name="checkin" required>
+            <input type="date" class="form-control" id="checkin" placeholder="checkin" name="checkin" required
+                onchange=datevalidate()>
             <label for="floatingPassword">Checkin Date</label>
             <span class="err" id="in_error"></span>
         </div>
@@ -83,31 +87,63 @@
         <button id="check" class=" btn  btn-success" onclick=findprice() style=" padding: 10px;">Check
             price & availablity</button>
     </div>
-    
+
     <div style="margin: 30px 50px ; text-align: center;">
-        <div id="total"
-            style="font-size: 40px; margin-left: auto; display: inline; border-radius: 10px;">
+        <div id="total" style="font-size: 40px; margin-left: auto; display: inline; border-radius: 10px;">
         </div>
     </div>
     <div style="text-align: center; margin-top: 30px;">
         <button id="submit" class="btn btn-primary" onclick=confirm()
-        style=" padding: 10px; border-radius: 10px;display: none; margin: auto;">confirm Booking </button>
+            style=" padding: 10px; border-radius: 10px;display: none; margin: auto;">confirm Booking </button>
     </div>
-    
+
     <script>
-        function findprice()
-        {
+
+        var today = new Date();
+        var t_date = today.getDate();
+        var t_month = today.getMonth() + 1;
+        var t_year = today.getFullYear();
+
+        if (t_date < 10) {
+            t_date = '0' + t_date;
+        }
+        if (t_month < 10) {
+            t_month = '0' + t_month;
+        }
+        var in_date = t_year + '-' + t_month + '-' + t_date;
+        console.log(in_date)
+        document.getElementById("checkin").setAttribute('min', in_date);
+
+        function datevalidate() {
+            var val = new Date(document.getElementById("checkin").value);
+            var in_date = val.getDate();
+            var in_month = val.getMonth() + 1;
+            var in_year = val.getFullYear();
+
+            if (in_date < 10) {
+                in_date = '0' + in_date;
+            }
+            if (in_month < 10) {
+                in_month = '0' + in_month;
+            }
+
+            var ck = in_year + '-' + in_month + '-' + in_date;
+            console.log(ck)
+            document.getElementById("checkout").setAttribute('min' , ck);
+        }
+
+        function findprice() {
             let valid = true;
             const prices = {
                 "executive": 3500,
                 "deluxe": 4500,
                 "luxury": 5000
             }
-			const name = document.getElementById("name").value;
-			const email = document.getElementById("email").value;
-			const mob = document.getElementById("mob").value;
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const mob = document.getElementById("mob").value;
             const room_type = document.getElementById("room-type").value;
-            const number_of_room  = document.getElementById("num").value
+            const number_of_room = document.getElementById("num").value
             const checkin = document.getElementById("checkin").value;
             const checkout = document.getElementById("checkout").value;
 
@@ -117,45 +153,41 @@
             document.getElementById("in_error").innerHTML = "";
             document.getElementById("out_error").innerHTML = "";
 
-			const name_p = /^[a-z A-Z]+$/;
-			if (!name.match(name_p)) {
-				document.getElementById("n_error").innerHTML = "enter a valid name";
-				valid = false;
-			}
+            const name_p = /^[a-z A-Z]+$/;
+            if (!name.match(name_p)) {
+                document.getElementById("n_error").innerHTML = "enter a valid name";
+                valid = false;
+            }
 
-			check = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,3}))$/;
-			if (email.match(check)) {
-				document.getElementById("e_error").innerHTML = "";
-			}
-			else {
-				document.getElementById("e_error").innerHTML = "enter a valid email";
-				valid = false;
-			}
+            check = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,3}))$/;
+            if (email.match(check)) {
+                document.getElementById("e_error").innerHTML = "";
+            }
+            else {
+                document.getElementById("e_error").innerHTML = "enter a valid email";
+                valid = false;
+            }
 
-			var mob_check = /^[0-9]{10}$/;
-			if (!mob.match(mob_check)) {
-				document.getElementById("mob_error").innerHTML = "enter a valid mobile number"
-				valid = false;
-			}
-            if(checkin === "")
-            {
+            var mob_check = /^[0-9]{10}$/;
+            if (!mob.match(mob_check)) {
+                document.getElementById("mob_error").innerHTML = "enter a valid mobile number"
+                valid = false;
+            }
+            if (checkin === "") {
                 document.getElementById("in_error").innerHTML = "select checkin date"
                 valid = false
             }
-            if(checkout === "")
-            {
+            if (checkout === "") {
                 document.getElementById("out_error").innerHTML = "select checkout date"
                 valid = false
             }
-            if(valid)
-            {
+
+            if (valid) {
                 const room = document.getElementById("num").value;
                 console.log(room);
                 const date1 = new Date(document.getElementById("checkin").value);
                 const date2 = new Date(document.getElementById("checkout").value);
-                console.log(date1.getTime() + "   " + date2.getTime());
-
-                var diff = (date2 - date1)/86400000 ;
+                var diff = (date2 - date1) / 86400000;
                 var tol = 4500 * room * diff;
                 document.getElementById("total").innerHTML = "Total Amount : " + tol;
                 document.getElementById("total").style.color = "red";
@@ -164,13 +196,13 @@
             }
         }
 
-        function confirm(){
+        function confirm() {
 
             const name = document.getElementById("name").value;
-			const email = document.getElementById("email").value;
-			const mob = document.getElementById("mob").value;
+            const email = document.getElementById("email").value;
+            const mob = document.getElementById("mob").value;
             const room_type = document.getElementById("room-type").value;
-            const number_of_room  = document.getElementById("num").value
+            const number_of_room = document.getElementById("num").value
             const checkin = document.getElementById("checkin").value;
             const checkout = document.getElementById("checkout").value;
 
@@ -194,11 +226,12 @@
                 .then((response) => response.json())
                 .then((json) => {
                     console.log(json);
-                    if(json.message === 'Room has been booked'){
+                    if (json.message === 'Room has been booked') {
                         location.href = './mybooking.html';
                     }
-            });
+                });
         }
     </script>
 </body>
+
 </html>
