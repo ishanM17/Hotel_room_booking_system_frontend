@@ -22,15 +22,13 @@
 
 
       <div class="form-floating">
-        <input class="form-control" placeholder="name@example.com" name="email" ng-model="email" required id="email-input">
-        <label for="floatingInput" ng-show="from1.email.$invalid">Email</label>
-        <center style="color: red;"><span ng-show="from1.email.$invalid">Email required</span></center>
+        <input type="email" class="form-control" id="email-input" placeholder="name@example.com" name="email">
+        <label for="floatingInput">Email address</label>
         <span id="e_error"></span>
       </div>
       <div class="form-floating">
-        <input type="password" class="form-control" id="password" name="username1" ng-model="username1" required placeholder="Password" name="password">
-        <label for="floatingInput" ng-show="from1.username1.$invalid">Password</label>
-        <center style="color: red;"><span ng-show="from1.username1.$invalid">Password required</span></center>
+        <input type="password" class="form-control" id="password" placeholder="Password" name="password">
+        <label for="floatingPassword">Password</label>
         <span id="pass_error"></span>
         <button class="w-100 btn btn-lg btn-primary" type="submit" onclick=login()>Login!</button>
         <center>
@@ -39,9 +37,27 @@
       </div>
       <script>
         function login() {
+          var valid = true;
+
+          document.getElementById("e_error").innerHTML = "";
+          document.getElementById("pass_error").innerHTML = "";
           let email = document.getElementById("email-input").value;
           let password = document.getElementById("password").value;
-          let currentUser = {
+
+          if(email === "")
+          {
+            document.getElementById("e_error").innerHTML = "Enter your email";
+            valid = false;
+          }
+          if(password === "")
+          {
+            document.getElementById("pass_error").innerHTML = "Enter your password";
+            valid = false;
+          }
+
+          if(valid === true)
+          {
+            let currentUser = {
             "email": email,
             "password": password
           };
@@ -63,12 +79,10 @@
               }
             });
           return;
+          }
+          
         }
       </script>
-
-    </form>
-    <form action="">
-
 
     </form>
 
