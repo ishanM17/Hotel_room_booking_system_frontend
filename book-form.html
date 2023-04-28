@@ -89,7 +89,7 @@
     </div>
 
     <div style="margin: 30px 50px ; text-align: center;">
-        <div id="total" style="font-size: 40px; margin-left: auto; display: inline; border-radius: 10px;">
+        <div id="total" style="padding: 20px; font-size: 40px; margin-left: auto; border-radius:20px;  background-color: lightgrey; display: none;">
         </div>
     </div>
     <div style="text-align: center; margin-top: 30px;">
@@ -191,6 +191,7 @@
                 var tol = 4500 * room * diff;
                 document.getElementById("total").innerHTML = "Total Amount : " + tol;
                 document.getElementById("total").style.color = "red";
+                document.getElementById("total").style.display = "inline";
                 document.getElementById("check").style.display = "none";
                 document.getElementById("submit").style.display = "block";
             }
