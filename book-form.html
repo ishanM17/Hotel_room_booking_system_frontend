@@ -11,24 +11,30 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <style>
         body {
-            background: url('./images/win.jpeg');
-            background-size: cover;
+            /* background: url('./images/win.jpeg'); */
+            /* background-size: cover;
             background-position: center;
-            background-repeat: no-repeat;
+            background-repeat: no-repeat; */
+            background: linear-gradient(140deg, #0673d3, #8e44ad);
+            height: 100vh;
+        }
+        .last{
+            background-color: white;
+            max-width: 450px;
+            padding: 20px;
+            padding-top: 0px;   
+            border-radius: 10px;
+            text-align: center;
+            margin: auto;
         }
 
         .title {
-            font-size: 3rem;
+           
+            font-size: 2rem;
             font-weight: bold;
             color: black;
             text-align: center;
-            margin-top: 2rem;
-            transition: transform 0.2s ease;
-        }
-
-        .form {
-            max-width: 450px;
-            padding: 0px 15px;
+            padding: 30px 0;
         }
 
         .err {
@@ -36,64 +42,76 @@
             font-size: 20px;
             font-weight: 600;
         }
+        .input-format{
+            margin-bottom: -1px;
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+        .format2{
+            margin-bottom: -1px;
+            border-radius: 0;
+        }
     </style>
 </head>
 
 <body>
-    <h1 class="title">Book your Rooms</h1>
-    <form class="form" method="post" style=" margin: auto; margin-top: 80px;">
-        <div class="form-floating">
-            <input type="text" class="form-control" id="name" placeholder="name" name="fName" required>
-            <label>Name</label>
-            <span class="err" id="n_error"></span>
-        </div>
-        <div class="form-floating">
-            <input type="email" class="form-control" id="email" placeholder="email" name="email" required>
-            <label for="floatingInput">Email address</label>
-            <span class="err" id="e_error"></span>
-
-        </div>
-        <div class="form-floating">
-            <input type="text" class="form-control" id="mob" placeholder="mob" name="mob" required>
-            <label for="floatingPassword">Mobile Number</label>
-            <span class="err" id="mob_error"></span>
-        </div>
-        <div class="form-floating">
-            <select class="form-select" id="room-type" aria-label="Default select example">
-                <option value="executive">Executive</option>
-                <option value="deluxe">Deluxe</option>
-                <option value="luxury">Luxury</option>
-            </select>
-        </div>
-        <div class="form-floating">
-            <input type="number" class="form-control" id="num" placeholder="num" value="1" name="num" min="1" max="20"
-                required>
-            <label for="floatingPassword">number of Rooms</label>
-            <span class="err" id="num_error"></span>
-        </div>
-        <div class="form-floating">
-            <input type="date" class="form-control" id="checkin" placeholder="checkin" name="checkin" required
-                onchange=datevalidate()>
-            <label for="floatingPassword">Checkin Date</label>
-            <span class="err" id="in_error"></span>
-        </div>
-        <div class="form-floating">
-            <input type="date" class="form-control" id="checkout" placeholder="checkOut" name="checkout" required>
-            <label for="floatingPassword">CheckOut Date</label>
-            <span class="err" id="out_error"></span>
-        </div>
-    </form>
-    <div style="text-align: center; margin-top: 30px;">
-        <button id="check" class=" btn  btn-success" onclick=findprice() style=" padding: 10px;">Check
+    <div class="last">
+        <form class="form" style=" margin: auto; margin-top: 80px;">
+            <h2 class="title">Book your Rooms</h2>
+            <div class="form-floating">
+                <input type="text" class="form-control input-format" id="name" placeholder="name" name="fName" required>
+                <label>Name</label>
+                <span class="err" id="n_error"></span>
+            </div>
+            <div class="form-floating
+            ">
+                <input type="email" class="form-control format2" id="email" placeholder="email" name="email" required>
+                <label for="floatingInput">Email address</label>
+                <span class="err" id="e_error"></span>
+    
+            </div>
+            <div class="form-floating">
+                <input type="text" class="form-control format2" id="mob" placeholder="mob" name="mob" required>
+                <label for="floatingPassword">Mobile Number</label>
+                <span class="err" id="mob_error"></span>
+            </div>
+            <div class="form-floating">
+                <select class="form-select format2" id="room-type" aria-label="Default select example">
+                    <option value="executive">Executive</option>
+                    <option value="deluxe">Deluxe</option>
+                    <option value="luxury">Luxury</option>
+                </select>
+            </div>
+            <div class="form-floating">
+                <input type="number" class="form-control format2" id="num" placeholder="num" value="1" name="num" min="1" max="20"
+                    required>
+                <label for="floatingPassword">number of Rooms</label>
+                <span class="err" id="num_error"></span>
+            </div>
+            <div class="form-floating">
+                <input type="date" class="form-control format2" id="checkin" placeholder="checkin" name="checkin" required
+                    onchange=datevalidate()>
+                <label for="floatingPassword">Checkin Date</label>
+                <span class="err" id="in_error"></span>
+            </div>
+            <div class="form-floating">
+                <input type="date" class="form-control" id="checkout" placeholder="checkOut" name="checkout" style="margin-bottom: 1px; border-top-left-radius: 0; border-top-right-radius: 0;" required>
+                <label for="floatingPassword">CheckOut Date</label>
+                <span class="err" id="out_error"></span>
+            </div>
+        </form>
+        <div style="text-align: center; margin-top: 30px;">
+        <button id="check" class=" btn  btn-primary" onclick=findprice() style=" padding: 10px;">Check
             price & availablity</button>
-    </div>
-
-    <div style="margin: 30px 50px ; text-align: center;">
-        <div id="total" style="padding: 20px; font-size: 40px; margin-left: auto; border-radius:20px;  background-color: lightgrey; display: none;">
         </div>
     </div>
+    <div style="margin: 30px 50px ; text-align: center;">
+        <div id="total" style="padding: 20px; font-size: 40px; margin-left: auto; border-radius:20px; display: none;">
+        </div>
+    </div>
+    
     <div style="text-align: center; margin-top: 30px;">
-        <button id="submit" class="btn btn-primary" onclick=confirm()
+        <button id="submit" class="btn btn-primary btn-lg" onclick=confirm()
             style=" padding: 10px; border-radius: 10px;display: none; margin: auto;">confirm Booking </button>
     </div>  
 
@@ -190,7 +208,7 @@
                 var diff = (date2 - date1) / 86400000;
                 var tol = 4500 * room * diff;
                 document.getElementById("total").innerHTML = "Total Amount : " + tol;
-                document.getElementById("total").style.color = "red";
+                document.getElementById("total").style.color = "white";
                 document.getElementById("total").style.display = "inline";
                 document.getElementById("check").style.display = "none";
                 document.getElementById("submit").style.display = "block";
