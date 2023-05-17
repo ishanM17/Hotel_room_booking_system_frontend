@@ -239,7 +239,8 @@
                 method: 'POST',
                 body: JSON.stringify(booking),
                 headers: {
-                    'Content-type': 'application/json; charset=UTF-8'
+                    'Content-type': 'application/json; charset=UTF-8',
+                    Authorization: "Bearer " + sessionStorage.getItem("jwtToken")
                 }
             })
                 .then((response) => response.json())

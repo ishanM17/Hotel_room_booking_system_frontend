@@ -133,7 +133,9 @@
           .then((response) => response.json())
           .then((json) => {
             console.log(json);
-            if(json.message === 'Signup successful'){
+            if(json.message === 'Success'){
+              let jwtToken = json.data.user.token;
+              sessionStorage.setItem("jwtToken", jwtToken);
               sessionStorage.setItem('userEmail', email);
               location.href = './main.html';
             }

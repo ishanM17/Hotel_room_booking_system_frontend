@@ -140,6 +140,7 @@
 		fetch('http://localhost:3000/book/get/' + sessionStorage.getItem('userEmail'), {
 			headers: {
 				'Content-type': 'application/json; charset=UTF-8',
+                Authorization: "Bearer " + sessionStorage.getItem("jwtToken")
 			}
 		})
 			.then((response) => response.json())
