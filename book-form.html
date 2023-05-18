@@ -20,7 +20,7 @@
         }
         .last{
             background-color: white;
-            max-width: 450px;
+            max-width: 400px;
             padding: 20px;
             padding-top: 0px;   
             border-radius: 10px;
@@ -31,7 +31,7 @@
         .title {
            
             font-size: 2rem;
-            font-weight: bold;
+            font-weight: 500;
             color: black;
             text-align: center;
             padding: 30px 0;
@@ -56,27 +56,10 @@
 
 <body>
     <div class="last">
-        <form class="form" style=" margin: auto; margin-top: 80px;">
+        <form class="form input" style=" margin: auto; margin-top: 80px;">
             <h2 class="title">Book your Rooms</h2>
             <div class="form-floating">
-                <input type="text" class="form-control input-format" id="name" placeholder="name" name="fName" required>
-                <label>Name</label>
-                <span class="err" id="n_error"></span>
-            </div>
-            <div class="form-floating
-            ">
-                <input type="email" class="form-control format2" id="email" placeholder="email" name="email" required>
-                <label for="floatingInput">Email address</label>
-                <span class="err" id="e_error"></span>
-    
-            </div>
-            <div class="form-floating">
-                <input type="text" class="form-control format2" id="mob" placeholder="mob" name="mob" required>
-                <label for="floatingPassword">Mobile Number</label>
-                <span class="err" id="mob_error"></span>
-            </div>
-            <div class="form-floating">
-                <select class="form-select format2" id="room-type" aria-label="Default select example">
+                <select class="form-select input-format" id="room-type" aria-label="Default select example">
                     <option value="executive">Executive</option>
                     <option value="deluxe">Deluxe</option>
                     <option value="luxury">Luxury</option>
@@ -101,7 +84,7 @@
             </div>
         </form>
         <div style="text-align: center; margin-top: 30px;">
-        <button id="check" class=" btn  btn-primary" onclick=findprice() style=" padding: 10px;">Check
+        <button id="check" class=" btn  btn-primary" onclick=findprice() style=" padding: 10px; margin: 20px 0;">Check
             price & availablity</button>
         </div>
     </div>
@@ -116,6 +99,11 @@
     </div>  
 
     <script>
+
+        if(!(sessionStorage.getItem("jwtToken"))){
+            alert("You need to sign in to access this page!");
+            location.href = './';
+        }
 
         var today = new Date();
         var t_date = today.getDate();
@@ -157,40 +145,14 @@
                 "deluxe": 4500,
                 "luxury": 5000
             }
-            const name = document.getElementById("name").value;
-            const email = document.getElementById("email").value;
-            const mob = document.getElementById("mob").value;
             const room_type = document.getElementById("room-type").value;
             const number_of_room = document.getElementById("num").value
             const checkin = document.getElementById("checkin").value;
             const checkout = document.getElementById("checkout").value;
 
-            document.getElementById("n_error").innerHTML = "";
-            document.getElementById("e_error").innerHTML = "";
-            document.getElementById("mob_error").innerHTML = "";
             document.getElementById("in_error").innerHTML = "";
             document.getElementById("out_error").innerHTML = "";
 
-            const name_p = /^[a-z A-Z]+$/;
-            if (!name.match(name_p)) {
-                document.getElementById("n_error").innerHTML = "enter a valid name";
-                valid = false;
-            }
-
-            check = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,3}))$/;
-            if (email.match(check)) {
-                document.getElementById("e_error").innerHTML = "";
-            }
-            else {
-                document.getElementById("e_error").innerHTML = "enter a valid email";
-                valid = false;
-            }
-
-            var mob_check = /^[0-9]{10}$/;
-            if (!mob.match(mob_check)) {
-                document.getElementById("mob_error").innerHTML = "enter a valid mobile number"
-                valid = false;
-            }
             if (checkin === "") {
                 document.getElementById("in_error").innerHTML = "select checkin date"
                 valid = false
@@ -202,11 +164,14 @@
 
             if (valid) {
                 const room = document.getElementById("num").value;
-                console.log(room);
+                let perDayPrice;
                 const date1 = new Date(document.getElementById("checkin").value);
                 const date2 = new Date(document.getElementById("checkout").value);
                 var diff = (date2 - date1) / 86400000;
-                var tol = 4500 * room * diff;
+                if (room_type === 'executive') { perDayPrice = 3500;}
+                else if (room_type === 'deluxe') { perDayPrice = 4500;}
+                else if (room_type === 'luxury') { perDayPrice = 5000;}
+                var tol = perDayPrice * room * diff;
                 document.getElementById("total").innerHTML = "Total Amount : " + tol;
                 document.getElementById("total").style.color = "white";
                 document.getElementById("total").style.display = "inline";
@@ -217,25 +182,19 @@
 
         function confirm() {
 
-            const name = document.getElementById("name").value;
-            const email = document.getElementById("email").value;
-            const mob = document.getElementById("mob").value;
             const room_type = document.getElementById("room-type").value;
             const number_of_room = document.getElementById("num").value
             const checkin = document.getElementById("checkin").value;
             const checkout = document.getElementById("checkout").value;
 
             let booking = {
-                "name": name,
-                "email": email,
-                "mobile": mob,
                 "room_type": room_type,
                 "num_of_rooms": number_of_room,
                 "checkin": checkin,
                 "checkout": checkout
             }
 
-            fetch('http://localhost:3000/book/post', {
+            fetch('https://hotel-backend-usro.onrender.com/book/post', {
                 method: 'POST',
                 body: JSON.stringify(booking),
                 headers: {
